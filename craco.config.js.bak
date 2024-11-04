@@ -1,0 +1,39 @@
+const CracoLessPlugin = require('craco-less');
+
+module.exports = {
+  plugins: [
+    {
+      plugin: CracoLessPlugin,
+      options: {
+        lessLoaderOptions: {
+          lessOptions: {
+            modifyVars: { '@primary-color': '#1DA57A' },
+            javascriptEnabled: true,
+          },
+        },
+      },
+    },
+  ],
+  webpack: {
+    configure: {
+      resolve: {
+        fallback: {
+          fs: false,  // 如果使用了fs模块，需配置为false
+          net: false, // 如果使用了net模块，需配置为false
+          tls: false, // 如果使用了tls模块，需配置为false
+          child_process: false, // 如果使用了child_process模块，需配置为false
+          assert: false,
+          url: false,
+          path: false,
+          timers: false,
+          http: false,
+          https: false,
+          querystring: false,
+          zlib: false,
+          util: false,
+          stream: false,
+        },
+      },
+    },
+  },
+};
