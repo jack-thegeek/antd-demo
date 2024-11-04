@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {Button, Form, Select} from 'antd';
 import AdvanceSelect from '../components/app-advance-select/AppAdvanceSelect'
 
@@ -20,6 +20,10 @@ const MySelect: React.FC = () => {
         console.log('外层的 onChange：', values)
     }
 
+    useEffect(() => {
+        form.setFieldValue('opt', [options[0]])
+    }, [])
+
 
     return (
         <Form
@@ -29,6 +33,7 @@ const MySelect: React.FC = () => {
         >
             <Form.Item name="opt" label="opt">
                 <AdvanceSelect
+                    value={form.getFieldValue('opt')}
                     onChange={onChange}
                     options={options}
                     trackBy="deliverable"
