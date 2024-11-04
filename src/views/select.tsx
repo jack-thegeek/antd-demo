@@ -1,23 +1,14 @@
 import React from 'react'
-import { Button, Form, Select } from 'antd';
+import {Button, Form, Select} from 'antd';
 import AdvanceSelect from '../components/app-advance-select/AppAdvanceSelect'
-
-const {Option} = Select
-
-interface OptionType {
-    name: string
-    id: number
-}
 
 const MySelect: React.FC = () => {
 
     const [form] = Form.useForm();
 
     const onFinish = (values: any) => {
-        console.log('Success:', ...values);
+        console.log('Success:', values);
     };
-
-    const [selected, setSelected] = React.useState<any[]>([]); // 初始化为空数组
 
     const options: any = [
         {deliverable: '1', label: 'Option 1'},
@@ -25,21 +16,21 @@ const MySelect: React.FC = () => {
         {deliverable: '3', label: 'Option 3'},
     ];
 
+    function onChange(values: any[]) {
+        console.log('外层的 onChange：', values)
+    }
+
 
     return (
         <Form
             form={form}
-            labelCol={{span: 8}}
-            wrapperCol={{span: 16}}
-            initialValues={{remember: true}}
             onFinish={onFinish}
             autoComplete="off"
         >
-            <Form.Item name="role" label="Role">
+            <Form.Item name="opt" label="opt">
                 <AdvanceSelect
+                    onChange={onChange}
                     options={options}
-                    value={selected}
-                    onChange={setSelected}
                     trackBy="deliverable"
                 />
             </Form.Item>

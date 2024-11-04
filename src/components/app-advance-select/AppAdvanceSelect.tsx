@@ -1,11 +1,11 @@
 import React from 'react'
-import { Select } from 'antd'
+import {Select} from 'antd'
 
 interface IProps {
     options: any
-    value?: any
-    onChange: any
     trackBy: string
+    value?: any
+    onChange?: any
 }
 
 /**
@@ -15,9 +15,8 @@ interface IProps {
  * 并且实现 value 为完整的对象
  */
 const AdvanceSelect = (props: IProps) => {
-    const { options, value, onChange, trackBy } = props
+    const {options, value, onChange, trackBy} = props
     const handleChange = (selectedValues: string[]) => {
-        debugger
         const selectedOptions = options.filter((option: any) => selectedValues.includes(option[trackBy]))
         onChange(selectedOptions)
     }
@@ -25,8 +24,7 @@ const AdvanceSelect = (props: IProps) => {
     return (
         <Select
             mode="multiple"
-            options={options}
-            value={value && value[trackBy] || undefined}
+            options={options.map((opt: any) => ({value: opt[trackBy], label: opt.label}))}
             onChange={handleChange}
         >
         </Select>
