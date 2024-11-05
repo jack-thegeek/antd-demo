@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import {Select} from 'antd'
 
 interface IProps {
@@ -16,22 +16,13 @@ interface IProps {
  */
 const AdvanceSelect = (props: IProps) => {
     const {options, value, onChange, trackBy} = props
-    const handleChange = (selectedValues: string[]) => {
-        const selectedOptions = options.filter((option: any) => selectedValues.includes(option[trackBy]))
-        onChange(selectedOptions)
+    const handleChange = (values: string[]) => {
+        const selectedOptions = options.filter((option: any) => values.includes(option[trackBy]))
+        onChange?.(selectedOptions)
     }
-
-    const [defaultValue, setDefaultValue] = useState([])
-
-    useEffect(() => {
-        const values = value ? value.map((opt: any) => ({value: opt[trackBy], label: opt.label})) : []
-        console.log('useEffect')
-        setDefaultValue(values)
-    }, [value])
-
     return (
         <Select
-            value={defaultValue}
+            value={value?.map((v:any)=>({value: v[trackBy]})) || []}
             mode="multiple"
             options={options.map((opt: any) => ({value: opt[trackBy], label: opt.label}))}
             onChange={handleChange}
