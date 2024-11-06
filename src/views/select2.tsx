@@ -20,6 +20,7 @@ const MySelect: React.FC = () => {
             form={form}
             onFinish={onFinish}
             autoComplete="off"
+            initialValues={{opt2: {deliverable: '3', label: 'Option 3', value: 'opt 3'}}}
         >
             <Form.Item
                 name="opt"
